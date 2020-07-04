@@ -24,7 +24,7 @@ class SingleProductCart extends Component {
         />{' '}
         <button
           onClick={this.handleClick}
-          className='btn btn-sm btn-outline-danger text-dark border border-1'>
+          className='btn btn-sm btn-outline-danger text-dark border border-1 m-2'>
           Update Amount
         </button>
       </div>

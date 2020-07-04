@@ -3,27 +3,15 @@ import Sidebar from '../products/Sidebar';
 import SingleProductCart from '../products/singleProductCart';
 
 class Cart extends Component {
-  state = {
-    cartTotal: 0,
-  };
-
-  calcTotal = () => {
-    let total = this.props.cart.length
-      ? this.props.cart.reduce(
-          (result, i) => (result += Number(i.price) * Number(i.amount)),
-          0
-        )
-      : 0;
-    this.setState({ cartTotal: total });
-  };
+  state = {};
 
   componentDidMount() {
-    this.calcTotal();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.cart.length !== this.props.cart.length) {
-      this.calcTotal();
+    if (!localStorage['token']) {
+      if (this.props.history) {
+        this.props.history.push('/');
+      } else {
+        window.location.href = '/';
+      }
     }
   }
 
@@ -33,7 +21,7 @@ class Cart extends Component {
         <Sidebar />
         <div className='row col-lg-10 justify-content-center text-center'>
           <h2 className='col-12'>
-            Total in Cart {this.state.cartTotal}
+            Total in Cart {this.props.cartSize}
             NIS
           </h2>
           {this.props.cart.length > 0 ? (

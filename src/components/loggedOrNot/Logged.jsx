@@ -6,12 +6,12 @@ class LoggedPanel extends Component {
 
   handleLogout = () => {
     localStorage.clear();
-    window.location.reload();
+    window.location.href = '/';
   };
   render() {
     return (
       <div className='navbar-nav'>
-        <Link className='nav-link mx-2 text-info' to='/profile'>
+        <Link className='nav-link mx-2 text-info' to='/user/profile'>
           Profile
         </Link>
         <Link className='nav-link mx-2 text-success' to='/user/cart'>

@@ -15,6 +15,7 @@ import { verifyToken, userAddToCart } from './services/UserServ';
 import Login from './components/user/login';
 import Signup from './components/user/signup';
 import Cart from './components/user/cart';
+import Profile from './components/user/profile';
 
 class App extends React.Component {
   constructor(props) {
@@ -127,6 +128,15 @@ class App extends React.Component {
               path='/user/cart'
               render={() => (
                 <Cart
+                  cartSize={
+                    this.state.userSession
+                      ? this.state.userSession.cart.reduce(
+                          (res, i) =>
+                            (res += Number(i.price) * Number(i.amount)),
+                          0
+                        )
+                      : 0
+                  }
                   updateCart={this.updateCart}
                   cart={
                     this.state.userSession ? this.state.userSession.cart : []
@@ -144,6 +154,18 @@ class App extends React.Component {
               path='/user/signup'
               render={(routeProps) => (
                 <Signup {...routeProps} signup={this.userLogged} />
+              )}
+            />
+            <Route
+              path='/user/profile'
+              render={() => (
+                <Profile
+                  user={
+                    this.state.userSession
+                      ? this.state.userSession.profile
+                      : null
+                  }
+                />
               )}
             />
             <Redirect to='/' />
