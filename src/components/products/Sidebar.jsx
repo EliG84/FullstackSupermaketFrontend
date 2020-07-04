@@ -5,9 +5,12 @@ class Sidebar extends Component {
   state = {};
   render() {
     return (
-      <div className='col-2 bg-light'>
+      <div className='col-lg-2 bg-light'>
         <div className='navbar-nav d-flex flex-column text-center'>
           <h3>Categories</h3>
+          <Link className='nav-fill text-decoration-none' to='/'>
+            All
+          </Link>
           <Link
             className='nav-fill text-decoration-none'
             to='/category/clothing'>

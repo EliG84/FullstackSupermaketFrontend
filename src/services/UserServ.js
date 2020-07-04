@@ -34,3 +34,14 @@ export const userSignup = async (user) => {
   let data = await resp.json();
   return data;
 };
+
+export const userAddToCart = async (id, cart) => {
+  const url = `http://localhost:3001/user/cartUpdate/${id}`;
+  let resp = await fetch(url, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(cart),
+  });
+  let data = await resp.json();
+  return data;
+};

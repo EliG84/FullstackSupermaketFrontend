@@ -14,12 +14,16 @@ class Products extends Component {
 
   render() {
     return (
-      <div className='container row m-1'>
+      <div className='row m-1 justify-content-center'>
         <Sidebar />
-        <div className='row col-10 justify-content-center'>
+        <div className='row col-lg-10 justify-content-center'>
           {this.state.products ? (
             this.state.products.map((i) => (
-              <SingleProduct key={i._id} item={i} />
+              <SingleProduct
+                key={i._id}
+                item={i}
+                addToCart={this.props.addToCart}
+              />
             ))
           ) : (
             <h1>Loading...</h1>

@@ -14,7 +14,7 @@ class LoggedPanel extends Component {
         <Link className='nav-link mx-2 text-info' to='/profile'>
           Profile
         </Link>
-        <Link className='nav-link mx-2 text-success' to='/cart'>
+        <Link className='nav-link mx-2 text-success' to='/user/cart'>
           Cart{' '}
           <span
             style={{
@@ -23,7 +23,7 @@ class LoggedPanel extends Component {
               color: 'white',
             }}
             className='badge'>
-            0
+            {this.props.cartSize}
           </span>
         </Link>
         <Link

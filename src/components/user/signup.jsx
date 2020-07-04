@@ -8,7 +8,13 @@ class Signup extends Component {
   };
 
   componentDidMount() {
-    if (localStorage['token']) this.props.history.push('/');
+    if (localStorage['token']) {
+      if (this.props.history) {
+        this.props.history.push('/');
+      } else {
+        window.location.href = '/';
+      }
+    }
   }
 
   emailRef = React.createRef();
@@ -37,7 +43,11 @@ class Signup extends Component {
         if (data.logged) {
           this.setState({ logged: true });
           this.props.signup(data.body, data.token);
-          this.props.history.push('/');
+          if (this.props.history) {
+            this.props.history.push('/');
+          } else {
+            window.location.href = '/';
+          }
         } else {
           alert(data.body);
         }
