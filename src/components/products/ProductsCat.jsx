@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import Sidebar from './Sidebar';
 import SingleProduct from './SingleProduct';
-import { apiGet } from '../../services/ApiServ';
+import { apiGetCat } from '../../services/ApiServ';
 
-class Products extends Component {
+class ProductsCat extends Component {
   state = {
     products: null,
   };
 
   async componentDidMount() {
-    this.setState({ products: await apiGet() });
+    this.setState({ products: await apiGetCat(this.props.match.params.cat) });
+  }
+
+  async componentDidUpdate(prevProps, prevState) {
+    if (prevProps.match.params.cat !== this.props.match.params.cat) {
+      this.setState({ products: await apiGetCat(this.props.match.params.cat) });
+    }
   }
 
   render() {
@@ -30,4 +36,4 @@ class Products extends Component {
   }
 }
 
-export default Products;
+export default ProductsCat;

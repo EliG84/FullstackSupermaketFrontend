@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Sidebar extends Component {
   state = {};
@@ -7,16 +8,17 @@ class Sidebar extends Component {
       <div className='col-2 bg-light'>
         <div className='navbar-nav d-flex flex-column text-center'>
           <h3>Categories</h3>
-          {this.props.categories &&
-            this.props.categories.map((cat) => (
-              <button
-                onClick={this.props.sort.bind(this, cat)}
-                key={cat}
-                className='btn btn-outline-warning border border-0 nav-link mx-2 text-dark my-1'
-                to={`${this.props.baseUrl}/${cat}`}>
-                {cat}
-              </button>
-            ))}
+          <Link
+            className='nav-fill text-decoration-none'
+            to='/category/clothing'>
+            Clothing
+          </Link>
+          <Link className='nav-fill text-decoration-none' to='/category/toys'>
+            Toys
+          </Link>
+          <Link className='nav-fill text-decoration-none' to='/category/foods'>
+            Food
+          </Link>
         </div>
       </div>
     );

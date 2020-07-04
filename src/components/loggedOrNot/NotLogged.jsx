@@ -6,10 +6,10 @@ class NotLoggedPanel extends Component {
   render() {
     return (
       <div className='navbar-nav'>
-        <Link className='nav-link mx-2 text-danger' to='/signup'>
+        <Link className='nav-link mx-2 text-danger' to='/user/signup'>
           Sign Up
         </Link>
-        <Link className='nav-link mx-2 text-success' to='/login'>
+        <Link className='nav-link mx-2 text-success' to='/user/login'>
           Log in
         </Link>
       </div>
