@@ -70,6 +70,23 @@ class App extends React.Component {
     }
   };
 
+  updateCart = (item) => {
+    const sessionCopy = { ...this.state.userSession };
+    if (item.amount === 0) {
+      sessionCopy.cart = sessionCopy.cart.filter((i) => i._id !== item._id);
+    } else {
+      sessionCopy.cart.map((i) => {
+        if (i._id === item.id) {
+          i.amount = Number(item.amount);
+        }
+        return i;
+      });
+    }
+    this.setState({ userSession: { ...sessionCopy } }, () => {
+      userAddToCart(this.state.userSession._id, this.state.userSession.cart);
+    });
+  };
+
   render() {
     return (
       <Router>
@@ -110,6 +127,7 @@ class App extends React.Component {
               path='/user/cart'
               render={() => (
                 <Cart
+                  updateCart={this.updateCart}
                   cart={
                     this.state.userSession ? this.state.userSession.cart : []
                   }

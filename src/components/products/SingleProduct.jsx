@@ -12,10 +12,12 @@ class SingleProduct extends Component {
 
   render() {
     return (
-      <div className='col-lg-4 p-2 border border-darken-2 m-1'>
+      <div className='d-flex flex-column align-items-center justify-content-center col-lg-4 p-2 border border-darken-2 m-1'>
         <img className='img-thumbnail' src={this.props.item.image} alt='' />
         <p>{this.props.item.name}</p>
+        <p>Price: {this.props.item.price}</p>
         <input
+          className='form-control row p-0'
           type='number'
           ref={this.amountRef}
           min={1}
@@ -23,7 +25,7 @@ class SingleProduct extends Component {
         />{' '}
         <button
           onClick={this.handleClick}
-          className='btn btn-sm btn-outline-light text-dark border border-1'>
+          className='btn btn-outline-success m-2'>
           Add
         </button>
       </div>

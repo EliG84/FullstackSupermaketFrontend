@@ -25,7 +25,11 @@ class ProductsCat extends Component {
         <div className='row col-10 justify-content-center'>
           {this.state.products ? (
             this.state.products.map((i) => (
-              <SingleProduct key={i._id} item={i} />
+              <SingleProduct
+                key={i._id}
+                item={i}
+                addToCart={this.props.addToCart}
+              />
             ))
           ) : (
             <h1>Loading...</h1>
