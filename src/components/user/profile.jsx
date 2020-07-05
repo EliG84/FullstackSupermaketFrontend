@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { userProfileUpdate } from '../../services/UserServ';
+import { userProfileUpdate, getUserById } from '../../services/UserServ';
 
 class Profile extends Component {
   constructor(props) {
@@ -28,7 +28,6 @@ class Profile extends Component {
   }
 
   fileAdder = (e) => {
-    console.log(e.target.files[0]);
     if (!this.state.allowed.includes(e.target.files[0].type)) {
       alert('Only Image types allowed!');
     } else {
@@ -47,12 +46,13 @@ class Profile extends Component {
       street: this.street.current.value,
       country: this.country.current.value,
       dob: this.dob.current.value,
-      files: this.state.file ? data : null,
     };
-    console.log(profile);
-    userProfileUpdate(this.props.userId, profile).then((data) => {
+    userProfileUpdate(this.props.userId, profile, data).then((data) => {
       console.log(data);
-      this.props.user = { ...data };
+      getUserById(this.props.userId).then((user) => {
+        console.log(user);
+        this.props.profileUpdate(user.profile);
+      });
     });
   };
 
@@ -100,18 +100,15 @@ class Profile extends Component {
           <div className='d-flex flex-column col-lg-6'>
             <label>Current</label>
             <input
-              ref={this.dob}
               className='form-control m-2'
               type='text'
-              defaultValue={this.props.user.dob
-                .slice(0, 10)
-                .replaceAll('-', '/')}
+              defaultValue={this.props.user.dob}
               disabled
             />
           </div>
           <div className='d-flex flex-column col-lg-6'>
             <label>Enter New</label>
-            <input className='form-control m-2' type='date' />
+            <input ref={this.dob} className='form-control m-2' type='date' />
           </div>
         </div>
         <button onClick={this.handleUpdate} className='btn btn-success m-2'>

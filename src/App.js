@@ -88,6 +88,13 @@ class App extends React.Component {
     });
   };
 
+  profileUpdate = (profile) => {
+    console.log(profile);
+    const user = { ...this.state.userSession };
+    user.profile = { ...profile };
+    this.setState({ userSession: { ...user } });
+  };
+
   render() {
     return (
       <Router>
@@ -160,6 +167,7 @@ class App extends React.Component {
               path='/user/profile'
               render={() => (
                 <Profile
+                  profileUpdate={this.profileUpdate}
                   userId={
                     this.state.userSession ? this.state.userSession._id : null
                   }
