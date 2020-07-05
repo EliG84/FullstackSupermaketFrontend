@@ -45,3 +45,14 @@ export const userAddToCart = async (id, cart) => {
   let data = await resp.json();
   return data;
 };
+
+export const userProfileUpdate = async (id, profile, data) => {
+  const url = `http://localhost:3001/userProfile/${id}`;
+  let prof = await fetch(url, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(profile),
+  });
+  let profData = await prof.json();
+  console.log(profData);
+};

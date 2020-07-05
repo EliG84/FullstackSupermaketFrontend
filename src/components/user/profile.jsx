@@ -1,7 +1,21 @@
 import React, { Component } from 'react';
+import { userProfileUpdate } from '../../services/UserServ';
 
 class Profile extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      file: null,
+      allowed: ['image/png', 'image/jpg', 'image/jpeg', 'image/bmp'],
+      loaded: 0,
+    };
+  }
+
+  FirstName = React.createRef();
+  LastName = React.createRef();
+  street = React.createRef();
+  country = React.createRef();
+  dob = React.createRef();
 
   componentDidMount() {
     if (!localStorage['token']) {
@@ -13,20 +27,56 @@ class Profile extends Component {
     }
   }
 
+  fileAdder = (e) => {
+    console.log(e.target.files[0]);
+    if (!this.state.allowed.includes(e.target.files[0].type)) {
+      alert('Only Image types allowed!');
+    } else {
+      this.setState({ file: e.target.files[0] });
+    }
+  };
+
+  handleUpdate = () => {
+    const data = new FormData();
+    if (this.state.file) {
+      data.append('userAvatar', this.state.file);
+    }
+    const profile = {
+      FirstName: this.FirstName.current.value,
+      LastName: this.LastName.current.value,
+      street: this.street.current.value,
+      country: this.country.current.value,
+      dob: this.dob.current.value,
+      files: this.state.file ? data : null,
+    };
+    console.log(profile);
+    userProfileUpdate(this.props.userId, profile).then((data) => {
+      console.log(data);
+      this.props.user = { ...data };
+    });
+  };
+
   render() {
     return this.props.user ? (
       <div className='d-flex flex-column align-items-center p-2 mt-3 border border-darken-2 bg-light'>
         <label>Profile Image</label>
         <img className='card-img w-25' src={this.props.user.image} alt='' />
         <label>Change Image</label>
-        <input className='form-control col-lg-6 m-2' type='file' />
         <input
+          className='form-control col-lg-6 m-2'
+          type='file'
+          name='userAvatar'
+          onChange={this.fileAdder}
+        />
+        <input
+          ref={this.FirstName}
           className='form-control col-lg-6 m-2'
           type='text'
           placeholder='First Name'
           defaultValue={this.props.user.FirstName}
         />
         <input
+          ref={this.LastName}
           className='form-control col-lg-6 m-2'
           type='text'
           placeholder='Last Name'
@@ -34,11 +84,13 @@ class Profile extends Component {
         />
         <label>Your Home Adress</label>
         <input
+          ref={this.street}
           className='form-control col-lg-6 m-2'
           type='text'
           defaultValue={this.props.user.street}
         />
         <input
+          ref={this.country}
           className='form-control col-lg-6 m-2'
           type='text'
           defaultValue={this.props.user.country}
@@ -48,6 +100,7 @@ class Profile extends Component {
           <div className='d-flex flex-column col-lg-6'>
             <label>Current</label>
             <input
+              ref={this.dob}
               className='form-control m-2'
               type='text'
               defaultValue={this.props.user.dob
@@ -61,7 +114,9 @@ class Profile extends Component {
             <input className='form-control m-2' type='date' />
           </div>
         </div>
-        <button className='btn btn-success m-2'>Save Changes</button>
+        <button onClick={this.handleUpdate} className='btn btn-success m-2'>
+          Save Changes
+        </button>
       </div>
     ) : (
       <h2 className='text-center'>Loading...</h2>

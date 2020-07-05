@@ -160,6 +160,9 @@ class App extends React.Component {
               path='/user/profile'
               render={() => (
                 <Profile
+                  userId={
+                    this.state.userSession ? this.state.userSession._id : null
+                  }
                   user={
                     this.state.userSession
                       ? this.state.userSession.profile

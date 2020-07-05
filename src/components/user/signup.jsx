@@ -18,7 +18,6 @@ class Signup extends Component {
   }
 
   emailRef = React.createRef();
-  usernameRef = React.createRef();
   passwordRef = React.createRef();
   repeat_passwordRef = React.createRef();
   answerRef = React.createRef();
@@ -34,7 +33,6 @@ class Signup extends Component {
     } else {
       let newUser = {
         email: this.emailRef.current.value,
-        username: this.usernameRef.current.value,
         password: this.passwordRef.current.value,
         repeat_password: this.repeat_passwordRef.current.value,
         answer: this.answerRef.current.value,
@@ -66,13 +64,6 @@ class Signup extends Component {
           type='email'
           placeholder='user@email.com'
           pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'
-          required
-        />
-        <input
-          ref={this.usernameRef}
-          className='form-control col-lg-6 m-3'
-          type='text'
-          placeholder='username'
           required
         />
         <input
