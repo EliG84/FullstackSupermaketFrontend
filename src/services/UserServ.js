@@ -1,5 +1,5 @@
 export const verifyToken = async (token) => {
-  const url = 'http://109.65.4.76/user/authToken';
+  const url = 'http://109.65.4.76:5000/user/authToken';
   let resp = await fetch(url, {
     headers: {
       'x-auth-token': token,
@@ -10,7 +10,7 @@ export const verifyToken = async (token) => {
 };
 
 export const userLogin = async (user) => {
-  const url = 'http://109.65.4.76/user/login';
+  const url = 'http://109.65.4.76:5000/user/login';
   let resp = await fetch(url, {
     method: 'POST',
     headers: {
@@ -23,7 +23,7 @@ export const userLogin = async (user) => {
 };
 
 export const userSignup = async (user) => {
-  const url = 'http://109.65.4.76/user/signup';
+  const url = 'http://109.65.4.76:5000/user/signup';
   let resp = await fetch(url, {
     method: 'POST',
     headers: {
@@ -36,7 +36,7 @@ export const userSignup = async (user) => {
 };
 
 export const userAddToCart = async (id, cart) => {
-  const url = `http://109.65.4.76/user/cartUpdate/${id}`;
+  const url = `http://109.65.4.76:5000/user/cartUpdate/${id}`;
   let resp = await fetch(url, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -47,7 +47,7 @@ export const userAddToCart = async (id, cart) => {
 };
 
 export const userProfileUpdate = async (id, profile) => {
-  const urlProf = `http://109.65.4.76/user/userProfile/${id}`;
+  const urlProf = `http://109.65.4.76:5000/user/userProfile/${id}`;
   let resp = await fetch(urlProf, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -58,7 +58,7 @@ export const userProfileUpdate = async (id, profile) => {
 };
 
 export const userAvatarUpdate = async (id, file) => {
-  const urlFile = `http://109.65.4.76/user/userAvatar/${id}`;
+  const urlFile = `http://109.65.4.76:5000/user/userAvatar/${id}`;
   let resp = await fetch(urlFile, {
     method: 'POST',
     body: file,
@@ -68,7 +68,7 @@ export const userAvatarUpdate = async (id, file) => {
 };
 
 export const getUserById = async (id) => {
-  const url = `http://109.65.4.76/user/single/${id}`;
+  const url = `http://109.65.4.76:5000/user/single/${id}`;
   let resp = await fetch(url);
   let data = await resp.json();
   return data;
