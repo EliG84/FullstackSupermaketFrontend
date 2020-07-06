@@ -14,7 +14,7 @@ export const apiGetCat = async (cat) => {
 
 export const apiSearch = async (searchQ) => {
   console.log(searchQ);
-  const url = `https://aqueous-brook-65256.herokuapp.com/api/${searchQ}`;
+  const url = `https://aqueous-brook-65256.herokuapp.com/api/search/${searchQ}`;
   let resp = await fetch(url);
   let data = await resp.json();
   console.log(data);
