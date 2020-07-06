@@ -16,6 +16,7 @@ import Login from './components/user/login';
 import Signup from './components/user/signup';
 import Cart from './components/user/cart';
 import Profile from './components/user/profile';
+import ProductsSearch from './components/products/ProductsSearch';
 
 class App extends React.Component {
   constructor(props) {
@@ -89,7 +90,6 @@ class App extends React.Component {
   };
 
   profileUpdate = (profile) => {
-    console.log(profile);
     const user = { ...this.state.userSession };
     user.profile = { ...profile };
     this.setState({ userSession: { ...user } });
@@ -128,6 +128,13 @@ class App extends React.Component {
               path='/category/:cat'
               render={(routeProps) => (
                 <ProductsCat {...routeProps} addToCart={this.addToCart} />
+              )}
+            />
+            <Route
+              exact
+              path='/search/:name'
+              render={(routeProps) => (
+                <ProductsSearch {...routeProps} addToCart={this.addToCart} />
               )}
             />
             <Route

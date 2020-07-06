@@ -46,21 +46,25 @@ export const userAddToCart = async (id, cart) => {
   return data;
 };
 
-export const userProfileUpdate = async (id, profile, data) => {
+export const userProfileUpdate = async (id, profile) => {
   const urlProf = `http://localhost:3001/user/userProfile/${id}`;
-  let respProf = await fetch(urlProf, {
+  let resp = await fetch(urlProf, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(profile),
   });
+  let data = await resp.json();
+  return data;
+};
+
+export const userAvatarUpdate = async (id, file) => {
   const urlFile = `http://localhost:3001/user/userAvatar/${id}`;
-  let respAv = await fetch(urlFile, {
+  let resp = await fetch(urlFile, {
     method: 'POST',
-    body: data,
+    body: file,
   });
-  let profData = await respProf.json();
-  let avData = await respAv.json();
-  return { avUp: avData, profUp: profData };
+  let data = await resp.json();
+  return data;
 };
 
 export const getUserById = async (id) => {

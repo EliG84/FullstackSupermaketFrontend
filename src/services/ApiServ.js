@@ -11,3 +11,12 @@ export const apiGetCat = async (cat) => {
   let data = await resp.json();
   return data;
 };
+
+export const apiSearch = async (searchQ) => {
+  console.log(searchQ);
+  const url = `http://localhost:3001/api/search/${searchQ}`;
+  let resp = await fetch(url);
+  let data = await resp.json();
+  console.log(data);
+  return data;
+};

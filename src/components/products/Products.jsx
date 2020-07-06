@@ -18,13 +18,17 @@ class Products extends Component {
         <Sidebar />
         <div className='row col-lg-10 justify-content-center'>
           {this.state.products ? (
-            this.state.products.map((i) => (
-              <SingleProduct
-                key={i._id}
-                item={i}
-                addToCart={this.props.addToCart}
-              />
-            ))
+            this.state.products.length > 0 ? (
+              this.state.products.map((i) => (
+                <SingleProduct
+                  key={i._id}
+                  item={i}
+                  addToCart={this.props.addToCart}
+                />
+              ))
+            ) : (
+              <h1>No Results</h1>
+            )
           ) : (
             <h1>Loading...</h1>
           )}
