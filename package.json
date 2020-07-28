@@ -42,6 +42,5 @@
   },
   "devDependencies": {
     "bootstrap": "^4.5.0"
-  },
-  "_comment":"homepage: https://speedtech2020.com/reactApp2/"
+  }
 }
